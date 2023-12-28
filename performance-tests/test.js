@@ -2,6 +2,14 @@ import http from "k6/http";
 import {check} from "k6";
 
 
+//headers for request headers
+
+let params = { 
+    headers: { 
+        "Authorization" : ""
+    }
+}
+
 const binFile = open("input.csv", "b");
 
 export const options = {
@@ -22,12 +30,15 @@ export const options = {
 
 
 export default function uploadFileBinary() {
+
+    params.headers.Authorization = "Bearer " + "<token>" // add your token here 
+
     var data = {
         field: "this is standard file",
         file: http.file(binFile, "test.bin")
     }
 
-    let response = http.post("http://localhost:5258/api/file/uploadbinaryfile", data);
+    let response = http.post("http://localhost:5258/api/file/uploadbinaryfile", params, data);
 
     check(response, { "status was 200": (r) => r.status === 200});
 }
