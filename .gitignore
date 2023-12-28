@@ -1,3 +1,4 @@
 uploadfilesapi/.DS_Store
 uploadfilesapi/obj/*
 .DS_Store
+uploadfilesapi/bin/Debug/net6.0/*
